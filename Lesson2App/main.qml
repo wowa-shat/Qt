@@ -1,6 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.13
 
 Window {
     id: window
@@ -35,6 +35,7 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 20
         anchors.top: login.bottom
+        echoMode: TextInput.Password
         anchors.topMargin: 10
         placeholderText: "Password"
         maximumLength: 11
@@ -46,6 +47,7 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         font.pixelSize: 20
         anchors.top: password.bottom
+        echoMode: TextInput.Password
         anchors.topMargin: 10
         placeholderText: "Please, repeat password"
         visible: (status == 1) ? true : false
@@ -71,10 +73,27 @@ Window {
         text: "Sign in"
         enabled: status == 0 && login.length > 4 && password.length > 4 ||
                  status == 1 && login.length > 4 && password.length > 4 &&
-                 repeatPassword.length > 4 && nickname.length > 4 && password.text == repeatPassword.text
+                 repeatPassword.length > 4 && nickname.length > 4
         onClicked: {
-            loadingIndicatorOpacity.start()
+            if (password.text != repeatPassword.text && status == 1)
+            {
+                passwordValues.visible = true
+            }
+            else
+                loadingIndicatorOpacity.restart()
+                loadingIndicator.visible = true
         }
+    }
+
+    Text {
+        id: passwordValues
+        color: "#dd2323"
+        text: qsTr("password values aren't same!")
+        font.pixelSize: 15
+        topPadding: 20
+        anchors.top: button.bottom
+        visible: false
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     BusyIndicator {
@@ -118,6 +137,8 @@ Window {
                     password.text = ""
                     repeatPassword.text = ""
                     nickname.text = ""
+                    passwordValues.visible = false
+                    loadingIndicator.visible = false
                 }
             }
         }
@@ -144,6 +165,8 @@ Window {
                     password.text = ""
                     repeatPassword.text = ""
                     nickname.text = ""
+                    passwordValues.visible = false
+                    loadingIndicator.visible = false
                 }
             }
         }
