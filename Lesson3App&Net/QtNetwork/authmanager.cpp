@@ -27,7 +27,6 @@ void AuthManager::registerer(const QString &login, const QString &password)
 
     connect(reply, &QNetworkReply::finished,
             [this, reply](){
-        qDebug() << "Register error: " << reply -> errorString();
         emit registererRequestCompleted(reply->errorString());
         reply -> deleteLater();
     });
@@ -52,8 +51,6 @@ void AuthManager::authenticate(const QString &login, const QString &password)
             [this, reply](){
             QJsonObject obj = QJsonDocument::fromJson(reply -> readAll()).object();
             QString token = obj.value("token").toString();
-        qDebug() << "Auth error: " << reply -> errorString();
-        qDebug() << "Token: " << token;
         emit authenticateRequestCompleted(reply -> errorString(), token);
         reply -> deleteLater();
     });
