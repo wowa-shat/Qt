@@ -46,7 +46,6 @@ Item {
         echoMode: TextInput.Password
         anchors.topMargin: 10
         placeholderText: "Please, repeat password"
-        visible: (status == 1) ? true : false
     }
 
     TextField {
@@ -57,18 +56,17 @@ Item {
         anchors.top: repeatPassword.bottom
         anchors.topMargin: 10
         placeholderText: "Nickname"
-        visible: (status == 1) ? true : false
     }
 
     Button {
         id: buttonReg
-        anchors.top: (status == 0) ? password.bottom : nickname.bottom
+        anchors.top: nickname.bottom
         anchors.topMargin: 10
         font.pixelSize: 10
         anchors.horizontalCenter: parent.horizontalCenter
         text: "Sign Up"
         onClicked: {
-            if (password.text !== repeatPassword.text && status === 1)
+            if (password.text !== repeatPassword.text)
             {
                 passwordValues.visible = true
             }

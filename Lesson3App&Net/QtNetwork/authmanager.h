@@ -9,8 +9,6 @@ class AuthManager : public QObject
 {
     Q_OBJECT
 public:
-    QString authenticateError;
-    QString registererError;
 
     explicit AuthManager(QObject *parent = nullptr);
 
@@ -20,19 +18,12 @@ public:
     void authenticate(const QString &login,
                       const QString &password);
 
-    QString getToken();
-
-private slots:
-    void onRegistererFinished();
-    void onAuthenticateFinished();
+private:
+    QNetworkAccessManager _net;
 
 signals:
     void registererRequestCompleted(QString);
-    void authenticateRequestCompleted(QString);
-
-private:
-    QNetworkAccessManager _net;
-    QString token;
+    void authenticateRequestCompleted(QString, QString);
 
 };
 

@@ -9,7 +9,6 @@ Window {
     width: 280
     height: 500
     title: qsTr("LOG IN")
-    property int status: 0
 
     Loader{
         id: pageLoader
@@ -29,7 +28,6 @@ Window {
             font.underline: true
 
             onClicked: {
-                window.status = 0
                 signUp.font.underline = false
                 signIn.font.underline = true
                 pageLoader.source = "qml/LoginForm.qml"
@@ -46,10 +44,9 @@ Window {
             text: qsTr("Sign up")
 
             onClicked: {
-                    window.status = 1
                     signIn.font.underline = false
                     signUp.font.underline = true
-                pageLoader.source = "qml/Registration.qml"
+                    pageLoader.source = "qml/Registration.qml"
             }
         }
     }

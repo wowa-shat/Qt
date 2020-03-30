@@ -8,7 +8,6 @@ Text {
 
     MouseArea {
         id: mouseClick
-        enabled: !instance
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
         onClicked: {
