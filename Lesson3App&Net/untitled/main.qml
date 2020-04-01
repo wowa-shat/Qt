@@ -9,11 +9,12 @@ Window {
     width: 280
     height: 500
     title: qsTr("LOG IN")
+    property int status: 0
 
     Loader{
         id: pageLoader
         anchors.fill: parent
-        source: "qml/LoginForm.qml"
+        source: (window.status == 0) ? "qml/LoginForm.qml" : "qml/Registration.qml"
     }
 
     Row {
@@ -25,13 +26,9 @@ Window {
         ClickableText {
             id: signIn
             text: qsTr("Sign in")
-            font.underline: true
+            font.underline: (status == 0) ? true : false
 
-            onClicked: {
-                signUp.font.underline = false
-                signIn.font.underline = true
-                pageLoader.source = "qml/LoginForm.qml"
-            }
+            onClicked: status = 0
         }
 
         Text {
@@ -42,12 +39,8 @@ Window {
         ClickableText {
             id: signUp
             text: qsTr("Sign up")
-
-            onClicked: {
-                    signIn.font.underline = false
-                    signUp.font.underline = true
-                    pageLoader.source = "qml/Registration.qml"
-            }
+            font.underline: (status == 0) ? false : true
+            onClicked: status = 1
         }
     }
 }

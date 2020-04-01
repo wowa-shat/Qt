@@ -71,8 +71,10 @@ Item {
                 passwordValues.visible = true
             }
             else
+            {
                 loadingIndicatorOpacity.restart()
                 loadingIndicator.visible = true
+            }
         }
     }
 
