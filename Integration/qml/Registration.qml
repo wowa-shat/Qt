@@ -13,7 +13,7 @@ Item {
         id:authManager
         onRegistererRequestCompleted: {
             dialog.visible = true
-            dialog.text = message == "Неизвестная ошибка" ? "Вы зарегистрированы!" : message
+            dialog.text = message == "Неизвестная ошибка" ? "Вы зарегистрированы!" : "Данный логин уже зарегистрирован"
         }
     }
 
